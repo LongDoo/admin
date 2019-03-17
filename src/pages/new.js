@@ -44,15 +44,19 @@ export default class New extends Component {
 
   submit = e => {
     e.preventDefault()
-    console.log(this.state)
-    console.log(qs.stringify(this.state))
     const options = {
       method: 'POST',
       headers: { 'content-type': 'application/x-www-form-urlencoded' },
       data: qs.stringify(this.state),
       url: 'http://45.76.181.50/new'
     }
-    axios(options).then(res => console.log(res)).catch(err => console.log(err))
+    axios(options)
+      .then(res => {
+        if (res.status == 200) {
+          window.location = '/new'
+        }
+      })
+      .catch(err => console.log(err))
   }
 
   render() {
